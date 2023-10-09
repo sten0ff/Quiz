@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Nullam</h1>
+<h2>
+    <ul>
+        <a th:href="@{/}">Homepage</a>
+    </ul>
+</h2>
+<b> Questions: </b>
+<ol>
+    <li th:each="question : ${quiz.questions}">
+        <span th:text="${question.text}"></span>
+        <span th:text="${!question.hasCorrectAnswer()? '(HAS NO CORRECT ANSWERS)':''}"></span>
+        <a th:href="@{/answer/create/{id}(id=${question.id})}">Vaata</a>
+        <a th:href="@{/question/remove/{id}(id=${question.id})}">Remove</a>
+    </li>
+</ol>
+<h3>Add new question</h3>
+<form th:action="@{/question/create/{quiz_id}(quiz_id=${quiz.id})}" method="post">
+    Question: <label><input type="text"  name="text"/></label><br><br>
+    Select difficulty :
+    <select name="difficulty">
+        <option th:each = "difficulty : ${difficulties}"  th:value="${difficulty.name()}" th:text="${difficulty.name()} ">
+        </option>
+    </select>
+    <br>
+    Allow multiple choice: <input type="checkbox" name="multipleChoice">
+    <input type="button" onclick="window.location.href='/'" value="Tagasi">
+    <input type="submit" value="Salvesta"/>
+</form>
+</body>
+</html>

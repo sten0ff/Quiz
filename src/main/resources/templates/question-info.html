@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+</head>
+<body>
+<h1>Quiz</h1>
+<h2>
+  <ul>
+    <a th:href="@{/}">Homepage</a>
+  </ul>
+</h2>
+<h3>Question info</h3>
+<form th:action="@{'/quiz/change-question/' + ${question.id}}"  method="post">
+Question: <label><input type="text" th:value="${question.text}" name="text"/></label><br><br>
+  <input type="submit" value="Salvesta"/>
+</form>
+
+<div th:each="answer: ${question.getAnswers()}">
+    <div th:text="${answer.getText() + ' ('+ (answer.isCorrect()?'correct':'not correct') + ')'} "></div>
+    <a th:href="@{/answer/remove/{id}(id=${answer.id})}">Remove
+    </a>
+</div>
+<h3>Add new answer</h3>
+<form th:action="@{/answer/create/{question_id}(question_id=${question.id})}" method="post">
+    Answer: <label><input type="text"  name="text"/></label><br><br>
+    <br>
+    Correct: <input type="checkbox" th:disabled="${question.isNotAllowMultiplyChoiceAndHasCorrectAnswer()}" name="correct"/>
+    <input type="button" onclick="window.location.href='/'" value="Tagasi">
+    <input type="submit" value="Salvesta"/>
+</form>
+</body>
+</html>

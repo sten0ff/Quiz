@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Result</title>
+</head>
+<body>
+<h1>
+  <ul>
+    <a th:href="@{/}">Homepage</a>
+  </ul>
+</h1>
+<h2>Result</h2>
+<p>Correct Answers: <span th:text="${correctAnswers}"></span></p>
+<p>Total questions: <span th:text="${totalQuestions}"></span></p>
+
+</body>
+</html>

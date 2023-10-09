@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Start</title>
+</head>
+<body>
+<h1>Quiz: <span th:text="${quiz.text}"></span></h1>
+<form th:action="@{'/quiz/submit/' + ${quiz.id}}" method="post">
+  <div th:each="question : ${questions}">
+    <div th:if="${question.hasCorrectAnswer() }">
+      <h3 th:text="${question.text}"></h3>
+      <div th:each="answer : ${question.answers}">
+        <div th:if="${question.multipleChoice}">
+          <input type="checkbox" th:name="'question_' + ${question.id}" th:value="${answer.id}"/>
+          <span th:text="${answer.text}"></span>
+        </div>
+        <div th:unless="${question.multipleChoice}">
+          <div th:if="${question.isNotAllowMultiplyChoiceAndHasCorrectAnswer()}">
+            <input type="radio" th:name="'question_' + ${question.id}" th:value="${answer.id}"/>
+            <span th:text="${answer.text}"></span>
+          </div>
+          <div th:unless="${question.isNotAllowMultiplyChoiceAndHasCorrectAnswer()}">
+            <span th:text="${answer.text}"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <button type="submit">Complete</button>
+</form>
+</body>
+</html>

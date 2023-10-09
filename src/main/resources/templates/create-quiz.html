@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz</title>
+</head>
+<body>
+<h1>Quiz</h1>
+<h2>
+    <ul>
+        <a th:href="@{/}">Homepage</a>
+    </ul>
+</h2>
+<h3>Add new quiz</h3>
+<form th:action="@{'/quiz/create'}" method="post">
+    Quiz name: <label><input type="text" name="text"/></label><br><br>
+    <input type="button" onclick="window.history.back()" value="Tagasi">
+    <input type="submit" value="Lisa"/>
+</form>
+</body>
+</html>
